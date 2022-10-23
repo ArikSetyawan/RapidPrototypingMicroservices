@@ -139,6 +139,39 @@ class ResourceBmc(Resource):
 		}
         return jsonify(data_return)
 
+    def put(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('bmc_id', location='json', type=int, required=True)
+        parser.add_argument('name', location='json', required=True)
+        args = parser.parse_args()
+
+        edit_bmc = Bmc.update(name=args['name']).where(Bmc.id == args['bmc_id'])
+        edit_bmc.execute()
+
+        data_return = {
+			"data":None,
+			"message":"Success Update BMC.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
+    def delete(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('bmc_id', location='args', type=int, required=True)
+        args = parser.parse_args()
+
+        delete_bmc = Bmc.delete().where(Bmc.id == args['bmc_id'])
+        delete_bmc.execute()
+
+        data_return = {
+			"data":None,
+			"message":"Success Delete BMC.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
 api.add_resource(ResourceBmc, '/api/bmc')
 
 if __name__ == '__main__':

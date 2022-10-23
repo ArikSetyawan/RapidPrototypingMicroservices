@@ -114,6 +114,48 @@ class FnfService(Resource):
         fnf = requests.post(f"{FNF_SERVICE}/api/fnf", json=args)
         return make_response(fnf.json(), fnf.status_code)
 
+    def put(self):
+        header = dict(request.headers)
+        if not checktoken(header):
+            data_return = {
+                "data":None,
+                "message":"Token Invalid/NotFound",
+                "code":"401",
+                "error":[{"params":"Token", "message":"Token Invalid/NotFound"}]
+            }
+            return make_response(data_return,401)
+        
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('fnf_id', type=int, location='json', required=True)
+        parser.add_argument('name', location='json')
+        parser.add_argument('description', location='json')
+        parser.add_argument('assign_to', location='json')
+        parser.add_argument('target_finish', location='json')
+        args = parser.parse_args()
+
+        # Hit F/NF Service
+        fnf = requests.put(f"{FNF_SERVICE}/api/fnf", json=args)
+        return make_response(fnf.json(), fnf.status_code)
+
+    def delete(self):
+        header = dict(request.headers)
+        if not checktoken(header):
+            data_return = {
+                "data":None,
+                "message":"Token Invalid/NotFound",
+                "code":"401",
+                "error":[{"params":"Token", "message":"Token Invalid/NotFound"}]
+            }
+            return make_response(data_return,401)
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('fnf_id', type=int, location='args', required=True)
+        args = parser.parse_args()
+
+        # Hit F/NF Service
+        fnf = requests.delete(f"{FNF_SERVICE}/api/fnf", params=args)
+        return make_response(fnf.json(), fnf.status_code)
+
 class CesService(Resource):
     def get(self):
         header = dict(request.headers)
@@ -183,6 +225,99 @@ class CesService(Resource):
             }
             return make_response(data_return,401)
 
+    def put(self):
+        header = dict(request.headers)
+        if not checktoken(header):
+            data_return = {
+                "data":None,
+                "message":"Token Invalid/NotFound",
+                "code":"401",
+                "error":[{"params":"Token", "message":"Token Invalid/NotFound"}]
+            }
+            return make_response(data_return,401)
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('cause_id', location='json', type=int)
+        parser.add_argument('effect_id', location='json', type=int)
+        parser.add_argument('solution_id', location='json', type=int)
+        parser.add_argument('name', location='json', required=True)
+        args = parser.parse_args()
+
+        if args['cause_id']:
+            data = {
+                "cause_id":args['cause_id'],
+                "name":args['name']
+            }
+
+            # Hit Ces Serive
+            update_cause = requests.put(f"{CES_SERVICE}/api/cause", json=data)
+            return make_response(update_cause.json(), update_cause.status_code)
+        elif args['effect_id']:
+            data = {
+                "effect_id":args['effect_id'],
+                "name":args['name']
+            }
+
+            # Hit Ces Serive
+            update_effect = requests.put(f"{CES_SERVICE}/api/effect", json=data)
+            return make_response(update_effect.json(), update_effect.status_code)
+        elif args['solution_id']:
+            data = {
+                "solution_id":args['solution_id'],
+                "name":args['name']
+            }
+
+            # Hit Ces Serive
+            update_solution = requests.put(f"{CES_SERVICE}/api/solution", json=data)
+            return make_response(update_solution.json(), update_solution.status_code)
+        else:
+            data_return = {
+                "data":None,
+                "message":"Invalid Data. Must Contain cause_id or effect_id or solution_id",
+                "code":"400",
+                "error":None
+            }
+            return make_response(data_return,400)
+
+    def delete(self):
+        header = dict(request.headers)
+        if not checktoken(header):
+            data_return = {
+                "data":None,
+                "message":"Token Invalid/NotFound",
+                "code":"401",
+                "error":[{"params":"Token", "message":"Token Invalid/NotFound"}]
+            }
+            return make_response(data_return,401)
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('cause_id', location='args', type=int)
+        parser.add_argument('effect_id', location='args', type=int)
+        parser.add_argument('solution_id', location='args', type=int)
+        args = parser.parse_args()
+
+        if args['cause_id']:
+            # Hit Ces Serive
+            ces = requests.delete(f"{CES_SERVICE}/api/cause", params={"cause_id":args["cause_id"]})
+            return make_response(ces.json(), ces.status_code)
+        elif args['effect_id']:
+            # Hit Ces Serive
+            ces = requests.delete(f"{CES_SERVICE}/api/effect", params={"effect_id":args["effect_id"]})
+            return make_response(ces.json(), ces.status_code)
+        elif args['solution_id']:
+            # Hit Ces Serive
+            ces = requests.delete(f"{CES_SERVICE}/api/solution", params={"solution_id":args["solution_id"]})
+            return make_response(ces.json(), ces.status_code)
+        else:
+            data_return = {
+                "data":None,
+                "message":"Invalid Data. Must Contain cause_id or effect_id or solution_id",
+                "code":"400",
+                "error":None
+            }
+            return make_response(data_return,400)
+
+
 class PdcService(Resource):
     def get(self):
         header = dict(request.headers)
@@ -226,6 +361,45 @@ class PdcService(Resource):
         pdc = requests.post(f"{PDC_SERVICE}/api/pdc", json=args)
         return make_response(pdc.json(), pdc.status_code)
 
+    def put(self):
+        header = dict(request.headers)
+        if not checktoken(header):
+            data_return = {
+                "data":None,
+                "message":"Token Invalid/NotFound",
+                "code":"401",
+                "error":[{"params":"Token", "message":"Token Invalid/NotFound"}]
+            }
+            return make_response(data_return,401)
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('pdc_id', location='json', type=int, required=True)
+        parser.add_argument('name', location='json', required=True)
+        args = parser.parse_args()
+
+        # Hit PDC Service
+        pdc = requests.put(f"{PDC_SERVICE}/api/pdc", json=args)
+        return make_response(pdc.json(), pdc.status_code)
+
+    def delete(self):
+        header = dict(request.headers)
+        if not checktoken(header):
+            data_return = {
+                "data":None,
+                "message":"Token Invalid/NotFound",
+                "code":"401",
+                "error":[{"params":"Token", "message":"Token Invalid/NotFound"}]
+            }
+            return make_response(data_return,401)
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('pdc_id', location='args', type=int, required=True)
+        args = parser.parse_args()
+        
+        # Hit Pdc Serive
+        pdc = requests.delete(f"{PDC_SERVICE}/api/pdc", params=args)
+        return make_response(pdc.json(), pdc.status_code)
+
 class BmcService(Resource):
     def get(self):
         header = dict(request.headers)
@@ -267,6 +441,45 @@ class BmcService(Resource):
 
         # Hit Bmc Service
         bmc = requests.post(f"{BMC_SERVICE}/api/bmc", json=args)
+        return make_response(bmc.json(), bmc.status_code)
+
+    def put(self):
+        header = dict(request.headers)
+        if not checktoken(header):
+            data_return = {
+                "data":None,
+                "message":"Token Invalid/NotFound",
+                "code":"401",
+                "error":[{"params":"Token", "message":"Token Invalid/NotFound"}]
+            }
+            return make_response(data_return,401)
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('bmc_id', location='json', type=int, required=True)
+        parser.add_argument('name', location='json', required=True)
+        args = parser.parse_args()
+
+        # Hit BMC Service
+        bmc = requests.put(f"{BMC_SERVICE}/api/bmc", json=args)
+        return make_response(bmc.json(), bmc.status_code)
+
+    def delete(self):
+        header = dict(request.headers)
+        if not checktoken(header):
+            data_return = {
+                "data":None,
+                "message":"Token Invalid/NotFound",
+                "code":"401",
+                "error":[{"params":"Token", "message":"Token Invalid/NotFound"}]
+            }
+            return make_response(data_return,401)
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('bmc_id', location='args', type=int, required=True)
+        args = parser.parse_args()
+        
+        # Hit BMC Serive
+        bmc = requests.delete(f"{BMC_SERVICE}/api/bmc", params=args)
         return make_response(bmc.json(), bmc.status_code)
 
 api.add_resource(AuthServiceLogin, '/login')

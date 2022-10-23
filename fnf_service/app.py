@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, abort, request, make_response, render_template
 from flask_restful import Api, Resource, reqparse
 from peewee import *
+import time, datetime
 
 # Setup database
 db = "fnf_service.db"
@@ -100,6 +101,66 @@ class Resource_fnf(Resource):
 		data_return = {
 			"data":None,
 			"message":"Success Create FNF.",
+			"code":"200",
+			"error":None
+		}
+		return jsonify(data_return)
+
+	def put(self):
+		parser = reqparse.RequestParser(bundle_errors=True)
+		parser.add_argument('fnf_id', type=int, location='json', required=True)
+		parser.add_argument('name', location='json')
+		parser.add_argument('description', location='json')
+		parser.add_argument('assign_to', location='json')
+		parser.add_argument('target_finish', location='json')
+
+		args = parser.parse_args()
+
+		# make target_finish time
+		target_finish = None
+		target_finish_print = None
+		if args['target_finish']:
+			try:
+				target_finish_print = args['target_finish']
+				target_finish = datetime.datetime.strptime(target_finish_print, '%m/%d/%Y')
+				target_finish = target_finish.timestamp()
+			except:
+				data_return = {
+					"data":None,
+					"message":"Failed Update FNF. target_finish invalid ('%m/%d/%Y'). ",
+					"code":"401",
+					"error":None
+				}
+				return make_response(data_return,401)
+
+		update_fnf = fnf.update(
+			name=args['name'],
+			description=args['description'],
+			assign_to=args['assign_to'],
+			target_finish=target_finish,
+			target_finish_print=target_finish_print
+		)
+		update_fnf.execute()
+
+		data_return = {
+			"data":None,
+			"message":"Success Update FNF.",
+			"code":"200",
+			"error":None
+		}
+		return jsonify(data_return)
+		
+	def delete(self):
+		parser = reqparse.RequestParser(bundle_errors=True)
+		parser.add_argument('fnf_id', type=int, location='args', required=True)
+		args = parser.parse_args()
+		
+		delete_fnf = fnf.delete().where(fnf.id == args['fnf_id'])
+		delete_fnf.execute()
+
+		data_return = {
+			"data":None,
+			"message":"Success Delete FNF.",
 			"code":"200",
 			"error":None
 		}

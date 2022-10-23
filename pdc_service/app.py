@@ -139,6 +139,39 @@ class ResourcePdc(Resource):
 		}
         return jsonify(data_return)
 
+    def put(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('pdc_id', location='json', type=int, required=True)
+        parser.add_argument('name', location='json', required=True)
+        args = parser.parse_args()
+
+        edit_pdc = Pdc.update(name=args['name']).where(Pdc.id == args['pdc_id'])
+        edit_pdc.execute()
+
+        data_return = {
+			"data":None,
+			"message":"Success Update PDC.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
+    def delete(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('pdc_id', location='args', type=int, required=True)
+        args = parser.parse_args()
+
+        delete_pdc = Pdc.delete().where(Pdc.id == args['pdc_id'])
+        delete_pdc.execute()
+
+        data_return = {
+			"data":None,
+			"message":"Success Delete PDC.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
 api.add_resource(ResourcePdc, '/api/pdc')
 
 if __name__ == '__main__':

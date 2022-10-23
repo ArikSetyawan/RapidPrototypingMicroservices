@@ -132,6 +132,49 @@ class ResourceCause(Resource):
 		}
         return jsonify(data_return)
 
+    def put(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('cause_id', location='json', type=int, required=True)
+        parser.add_argument('name', location='json', required=True)
+        args = parser.parse_args()
+
+        update_cause = Cause.update(name=args['name']).where(Cause.id == args['cause_id'])
+        update_cause.execute()
+
+        data_return = {
+			"data":None,
+			"message":"Success Update Cause in CES.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
+    def delete(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('cause_id', location='args', type=int, required=True)
+        args = parser.parse_args()
+
+        # cek if any effect relate to this cause
+        effect_check = Effect.select().where(Effect.cause_id == args['cause_id'])
+        if effect_check.exists():
+            data_return = {
+                "data":None,
+                "message":"Failed Delete Cause in CES. There still effect that connect to this cause",
+                "code":"400",
+                "error":None
+            }
+            return make_response(data_return,400)
+
+        delete_cause = Cause.delete().where(Cause.id == args['cause_id'])
+        delete_cause.execute()
+        data_return = {
+			"data":None,
+			"message":"Success Delete Cause in CES.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
 class ResourceEffect(Resource):
     def post(self):
         parser = reqparse.RequestParser(bundle_errors=True)
@@ -173,6 +216,49 @@ class ResourceEffect(Resource):
             }
             return make_response(data_return, 400)
 
+    def put(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('effect_id', location='json', type=int, required=True)
+        parser.add_argument('name', location='json', required=True)
+        args = parser.parse_args()
+
+        update_effect = Effect.update(name=args['name']).where(Effect.id == args['effect_id'])
+        update_effect.execute()
+
+        data_return = {
+			"data":None,
+			"message":"Success Update Effect in CES.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
+    def delete(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('effect_id', location='args', type=int, required=True)
+        args = parser.parse_args()
+
+        # cek if any solution relate to this effect
+        solution_check = Solution.select().where(Solution.id == args['effect_id'])
+        if solution_check.exists():
+            data_return = {
+                "data":None,
+                "message":"Failed Delete Effect in CES. There still solution that connect to this effect",
+                "code":"400",
+                "error":None
+            }
+            return make_response(data_return,400)
+
+        delete_effect = Effect.delete().where(Effect.id == args['effect_id'])
+        delete_effect.execute()
+        data_return = {
+			"data":None,
+			"message":"Success Delete Effect in CES.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
 class ResourceSolution(Resource):
     def post(self):
         parser = reqparse.RequestParser(bundle_errors=True)
@@ -208,11 +294,43 @@ class ResourceSolution(Resource):
         else:
             data_return = {
                 "data":None,
-                "message":"Failed Create Solution in CES. cause_id and kodekelompok not match",
+                "message":"Failed Create Solution in CES. effect_id and kodekelompok not match",
                 "code":"400",
                 "error":None
             }
             return make_response(data_return, 400)
+    
+    def put(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('solution_id', location='json', type=int, required=True)
+        parser.add_argument('name', location='json', required=True)
+        args = parser.parse_args()
+
+        update_solution = Solution.update(name=args['name']).where(Solution.id == args['solution_id'])
+        update_solution.execute()
+
+        data_return = {
+			"data":None,
+			"message":"Success Update Solution in CES.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
+
+    def delete(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('solution_id', location='args', type=int, required=True)
+        args = parser.parse_args()
+
+        delete_solution = Solution.delete().where(Solution.id == args['solution_id'])
+        delete_solution.execute()
+        data_return = {
+			"data":None,
+			"message":"Success Delete Solution in CES.",
+			"code":"200",
+			"error":None
+		}
+        return jsonify(data_return)
 
 api.add_resource(ResourceCES, '/api/ces')
 api.add_resource(ResourceCause, '/api/cause')
