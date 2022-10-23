@@ -139,7 +139,7 @@ class Resource_fnf(Resource):
 			assign_to=args['assign_to'],
 			target_finish=target_finish,
 			target_finish_print=target_finish_print
-		)
+		).where(fnf.id == args['fnf_id'])
 		update_fnf.execute()
 
 		data_return = {
