@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS Files -->
+    <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet" />
+</head>
+<body>
+    <h1>Functional / Non Functional</h1>
+
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-6">
+                <div class="border border-dark" style="min-height: 200px;">
+                    <h3>Functional</h3>
+                    {% for item in fnf['functional'] %}
+                    <ul>
+                        <li>{{item['name']}}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="border border-dark" style="min-height: 200px;">
+                    <h3>Non Functional</h3>
+                    {% for item in fnf['non_functional'] %}
+                    <ul>
+                        <li>{{item['name']}}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="{{url_for('static',filename='js/core/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/core/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/core/bootstrap.min.js')}}"></script>
+</body>
+</html>

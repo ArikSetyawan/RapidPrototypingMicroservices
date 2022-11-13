@@ -135,7 +135,7 @@ Coded by www.creative-tim.com
           <div class="col-md-12">
             <div class="card ">
               <div class="card-body ">
-                <h2>Functional / Non Functional</h2> <a href="#" class="btn btn-primary"><i class="nc-icon nc-cloud-download-93"></i></a>
+                <h2>Functional / Non Functional</h2> <a href="/fnf/print" class="btn btn-primary"><i class="nc-icon nc-cloud-download-93"></i></a>
                 <a href="#" class="btn btn-success btn-round" data-toggle="modal" data-target="#functionalmodal">Create Functional Feature</a> <a href="#" class="btn btn-success btn-round" data-toggle="modal" data-target="#nonfunctionalmodal">Create Non Functional Feature</a>
               </div>
             </div>
@@ -148,7 +148,7 @@ Coded by www.creative-tim.com
                 <h2>Functional Feature</h2>
                 <ul>
                   {% for item in fnf['functional'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#fnfeditmodal{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/fnf/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -160,7 +160,7 @@ Coded by www.creative-tim.com
                 <h2>Non Functional Feature</h2>
                 <ul>
                   {% for item in fnf['non_functional'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#fnfeditmodal{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/fnf/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -232,6 +232,63 @@ Coded by www.creative-tim.com
       </div>
     </div>
   </div>
+
+  <!-- Modal Edit FNF -->
+  {% for item in fnf['functional'] %}
+  <div class="modal fade" id="fnfeditmodal{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit FNF</h5>
+        </div>
+        <form action="/fnf/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Feature Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+            <label>Description</label>
+            <textarea name="description" class="form-control">{% if item['description'] != None %}{{item['description']}}{% endif %}</textarea>
+            <label>Assign To</label>
+            <input type="email" value="{% if item['assign_to'] != None %}{{item['assign_to']}}{% endif %}" class="form-control" name="assign_to">
+            <label>Target Finish</label>
+            <input type="date" value="{{item['target_finish_print']}}" class="form-control" name="target_finish">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in fnf['non_functional'] %}
+  <div class="modal fade" id="fnfeditmodal{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit FNF</h5>
+        </div>
+        <form action="/fnf/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Feature Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+            <label>Description</label>
+            <textarea name="description" class="form-control">{% if item['description'] != None %}{{item['description']}}{% endif %}</textarea>
+            <label>Assign To</label>
+            <input type="email" value="{% if item['assign_to'] != None %}{{item['assign_to']}}{% endif %}" class="form-control" name="assign_to">
+            <label>Target Finish</label>
+            <input type="date" value="{{item['target_finish_print']}}" class="form-control" name="target_finish">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 
 
   <!--   Core JS Files   -->

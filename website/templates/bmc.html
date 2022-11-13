@@ -148,7 +148,7 @@ Coded by www.creative-tim.com
                 <h4>Value Propositions</h4>
                 <ul>
                   {% for item in bmc['value_propositions'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -160,7 +160,7 @@ Coded by www.creative-tim.com
                 <h4>Customer Segments</h4>
                 <ul>
                   {% for item in bmc['customer_segments'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -172,7 +172,7 @@ Coded by www.creative-tim.com
                 <h4>Customer Relationships</h4>
                 <ul>
                   {% for item in bmc['customer_relationships'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -184,7 +184,7 @@ Coded by www.creative-tim.com
                 <h4>Channels</h4>
                 <ul>
                   {% for item in bmc['channels'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -196,7 +196,7 @@ Coded by www.creative-tim.com
                 <h4>Key Activities</h4>
                 <ul>
                   {% for item in bmc['key_activities'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -208,7 +208,7 @@ Coded by www.creative-tim.com
                 <h4>Key Resources</h4>
                 <ul>
                   {% for item in bmc['key_resources'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -220,7 +220,7 @@ Coded by www.creative-tim.com
                 <h4>Key Partners</h4>
                 <ul>
                   {% for item in bmc['key_partners'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -232,7 +232,7 @@ Coded by www.creative-tim.com
                 <h4>Cost Structures</h4>
                 <ul>
                   {% for item in bmc['cost_structures'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -244,7 +244,7 @@ Coded by www.creative-tim.com
                 <h4>Revenue Streams</h4>
                 <ul>
                   {% for item in bmc['revenue_streams'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#bmcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/bmc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -301,6 +301,205 @@ Coded by www.creative-tim.com
       </div>
     </div>
   </div>
+
+  <!-- Modal Edit -->
+  {% for item in bmc['value_propositions'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in bmc['customer_segments'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in bmc['customer_relationships'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in bmc['channels'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in bmc['key_activities'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in bmc['key_resources'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in bmc['key_partners'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in bmc['cost_structures'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in bmc['revenue_streams'] %}
+  <div class="modal fade" id="bmcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit BMC</h5>
+        </div>
+        <form action="/bmc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 
 
 

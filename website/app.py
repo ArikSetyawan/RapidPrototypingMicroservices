@@ -53,6 +53,15 @@ def cescontroller():
     ces = ces.json()["data"]
     return render_template("ces.html", ces=ces)
 
+@app.route('/ces/print')
+def cesprint():
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    ces = requests.get(f"{API_GATEWAY}/ces", params={"kodekelompok":session['team_id']}, headers={"Token":session['access_token']})
+    ces = ces.json()["data"]
+    return render_template("ces_print.html", ces=ces)
+
 @app.route("/ces/create_cause", methods=['POST'])
 def cescausecontroller():
     if 'login' not in session:
@@ -69,6 +78,28 @@ def cescausecontroller():
         "name":name
     }
     new_cause = requests.post(f"{API_GATEWAY}/ces", json=data, headers={"Token":session['access_token']})
+    return redirect(url_for('cescontroller'))
+
+@app.route('/ces/edit_cause/<cause_id>', methods=['POST'])
+def editcause(cause_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+        
+    name = request.form['name']
+    data ={
+        "cause_id":cause_id,
+        "name":name
+    }
+
+    edit_cause = requests.put(f"{API_GATEWAY}/ces", json=data, headers={"Token":session['access_token']})
+    return redirect(url_for('cescontroller'))
+
+@app.route('/ces/delete_cause/<cause_id>')
+def deletecause(cause_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    delete_cause = requests.delete(f"{API_GATEWAY}/ces", params={"cause_id":cause_id}, headers={"Token":session['access_token']})
     return redirect(url_for('cescontroller'))
 
 @app.route("/ces/create_effect", methods=['POST'])
@@ -91,6 +122,28 @@ def ceseffectcontroller():
     new_effect = requests.post(f"{API_GATEWAY}/ces", json=data, headers={"Token":session['access_token']})
     return redirect(url_for('cescontroller'))
 
+@app.route('/ces/edit_effect/<effect_id>', methods=['POST'])
+def editeffect(effect_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+        
+    name = request.form['name']
+    data ={
+        "effect_id":effect_id,
+        "name":name
+    }
+
+    edit_effect = requests.put(f"{API_GATEWAY}/ces", json=data, headers={"Token":session['access_token']})
+    return redirect(url_for('cescontroller'))
+
+@app.route('/ces/delete_effect/<effect_id>')
+def deleteeffect(effect_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    delete_effect = requests.delete(f"{API_GATEWAY}/ces", params={"effect_id":effect_id}, headers={"Token":session['access_token']})
+    return redirect(url_for('cescontroller'))
+
 @app.route("/ces/create_solution", methods=['POST'])
 def cessolutioncontroller():
     if 'login' not in session:
@@ -109,7 +162,28 @@ def cessolutioncontroller():
         "name":name
     }
     new_solution = requests.post(f"{API_GATEWAY}/ces", json=data, headers={"Token":session['access_token']})
-    print(new_solution.json())
+    return redirect(url_for('cescontroller'))
+
+@app.route('/ces/edit_solution/<solution_id>', methods=['POST'])
+def editsolution(solution_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+        
+    name = request.form['name']
+    data ={
+        "solution_id":solution_id,
+        "name":name
+    }
+
+    edit_solution = requests.put(f"{API_GATEWAY}/ces", json=data, headers={"Token":session['access_token']})
+    return redirect(url_for('cescontroller'))
+
+@app.route('/ces/delete_solution/<solution_id>')
+def deletesolution(solution_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    delete_solution = requests.delete(f"{API_GATEWAY}/ces", params={"solution_id":solution_id}, headers={"Token":session['access_token']})
     return redirect(url_for('cescontroller'))
 
 ################################## FNF ##################################
@@ -122,6 +196,16 @@ def fnfcontroller():
     fnf = requests.get(f"{API_GATEWAY}/fnf", params={"kodekelompok":session['team_id']}, headers={"Token":session['access_token']})
     fnf = fnf.json()['data']
     return render_template('fnf.html',fnf=fnf)
+
+@app.route('/fnf/print')
+def fnfprint():
+    if 'login' not in session:
+        return redirect(url_for('login'))
+    
+    # Get fnf
+    fnf = requests.get(f"{API_GATEWAY}/fnf", params={"kodekelompok":session['team_id']}, headers={"Token":session['access_token']})
+    fnf = fnf.json()['data']
+    return render_template('fnf_print.html',fnf=fnf)
 
 @app.route("/fnf/create_functional", methods=['POST'])
 def fnffunctionalcontroller():
@@ -159,6 +243,33 @@ def fnfnonfunctionalcontroller():
     new_nf = requests.post(f"{API_GATEWAY}/fnf", json=data, headers={"Token":session['access_token']})
     return redirect(url_for('fnfcontroller'))
 
+@app.route('/fnf/edit/<fnf_id>', methods=['POST'])
+def editfnf(fnf_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+        
+    name = request.form['name']
+    description = request.form['description']
+    assign_to = request.form['assign_to']
+    target_finish = request.form['target_finish']
+    data = {
+        "fnf_id":fnf_id,
+        "name":name,
+        "description":description,
+        "assign_to":assign_to,
+        "target_finish":target_finish
+    }
+    edit_nf = requests.put(f"{API_GATEWAY}/fnf", json=data, headers={"Token":session['access_token']})
+    return redirect(url_for('fnfcontroller'))
+
+@app.route('/fnf/delete/<fnf_id>')
+def deletefnf(fnf_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    delete_fnf = requests.delete(f"{API_GATEWAY}/fnf", params={"fnf_id":fnf_id}, headers={"Token":session['access_token']})
+    return redirect(url_for('fnfcontroller'))
+
 ################################## BMC ##################################
 @app.route('/bmc')
 def bmccontroller():
@@ -186,6 +297,28 @@ def bmcaddcontroller():
     }
 
     new_bmc = requests.post(f"{API_GATEWAY}/bmc", json=data, headers={"Token":session['access_token']})
+    return redirect(url_for('bmccontroller'))
+
+@app.route('/bmc/edit/<bmc_id>', methods=['POST'])
+def editbmc(bmc_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    name = request.form['name']
+    data = {
+        "bmc_id":bmc_id,
+        "name":name
+    }
+
+    update_bmc = requests.put(f"{API_GATEWAY}/bmc", json=data, headers={"Token":session['access_token']})
+    return redirect(url_for('bmccontroller'))
+
+@app.route('/bmc/delete/<bmc_id>')
+def deletebmc(bmc_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    delete_bmc = requests.delete(f"{API_GATEWAY}/bmc", params={"bmc_id":bmc_id}, headers={"Token":session['access_token']})
     return redirect(url_for('bmccontroller'))
 
 @app.route('/bmc/print')
@@ -225,6 +358,36 @@ def pdcaddcontroller():
     new_pdc = requests.post(f"{API_GATEWAY}/pdc", json=data, headers={"Token":session['access_token']})
     return redirect(url_for('pdccontroller'))
 
+@app.route('/pdc/print')
+def pdcprint():
+    if 'login' not in session:
+        return redirect(url_for('login'))
+    
+    pdc = requests.get(f"{API_GATEWAY}/pdc", params={"kodekelompok":session['team_id']}, headers={"Token":session['access_token']})
+    pdc = pdc.json()['data']
+    return render_template("pdc_print.html",pdc=pdc)
+
+@app.route('/pdc/edit/<pdc_id>', methods=['POST'])
+def editpdc(pdc_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    name = request.form['name']
+    data = {
+        "pdc_id":pdc_id,
+        "name":name
+    }
+
+    update_pdc = requests.put(f"{API_GATEWAY}/pdc", json=data, headers={"Token":session['access_token']})
+    return redirect(url_for('pdccontroller'))
+
+@app.route('/pdc/delete/<pdc_id>')
+def deletepdc(pdc_id):
+    if 'login' not in session:
+        return redirect(url_for('login'))
+
+    delete_pdc = requests.delete(f"{API_GATEWAY}/pdc", params={"pdc_id":pdc_id}, headers={"Token":session['access_token']})
+    return redirect(url_for('pdccontroller'))
 
 if __name__ == '__main__':
     app.run(debug=True, port=5010)

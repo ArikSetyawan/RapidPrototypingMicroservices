@@ -16,34 +16,34 @@
         <!-- Upper part -->
         <tr>
           <td colspan="2" rowspan="2">
-            <h4>Platform Stakeholders</h4>
+            <h4>Platform Owners</h4>
             <ul>
-              {% for item in bmc['platform_stakeholders'] %}
+              {% for item in pdc['platform_owners'] %}
                 <li>{{item['name']}}</li>
               {% endfor %}
             </ul>
           </td>
           <td colspan="2">
-            <h4>Key Activities</h4>
-            {% for item in bmc['key_activities'] %}
+            <h4>Platofrm Stakeholders</h4>
+            {% for item in pdc['platform_stakeholders'] %}
             <li>{{item['name']}}</li>
             {% endfor %}
           </td>
           <td colspan="2" rowspan="2">
-            <h4>Value Proposition</h4>
-            {% for item in bmc['value_propositions'] %}
+            <h4>Peers</h4>
+            {% for item in pdc['peers'] %}
             <li>{{item['name']}}</li>
             {% endfor %}
           </td>
           <td colspan="2">
-            <h4>Customer Relationship</h4>
-            {% for item in bmc['customer_relationships'] %}
+            <h4>Partners</h4>
+            {% for item in pdc['partners'] %}
             <li>{{item['name']}}</li>
             {% endfor %}
           </td>
           <td colspan="2" rowspan="2">
-            <h4>Customer Segments</h4>
-            {% for item in bmc['customer_segments'] %}
+            <h4>Transactions</h4>
+            {% for item in pdc['transactions'] %}
             <li>{{item['name']}}</li>
             {% endfor %}
           </td>
@@ -52,28 +52,28 @@
         <!-- Lower part -->
         <tr>
           <td colspan="2">
-            <h4>Key Resources</h4>
-            {% for item in bmc['key_resources'] %}
+            <h4>Channel and Contexts</h4>
+            {% for item in pdc['channel_and_contexts'] %}
             <li>{{item['name']}}</li>
             {% endfor %}
           </td>
           <td colspan="2">
-            <h4>Channels</h4>
-            {% for item in bmc['channels'] %}
+            <h4>Services</h4>
+            {% for item in pdc['services'] %}
             <li>{{item['name']}}</li>
             {% endfor %}
           </td>
         </tr>
         <tr>
           <td colspan="5">
-            <h4>Cost Structure</h4>
-            {% for item in bmc['cost_structures'] %}
+            <h4>Value Propositions</h4>
+            {% for item in pdc['value_propositions'] %}
             <li>{{item['name']}}</li>
             {% endfor %}
           </td>
           <td colspan="5">
-            <h4>Revenue Streams</h4>
-            {% for item in bmc['revenue_streams'] %}
+            <h4>Infrastructure and Components</h4>
+            {% for item in pdc['infrastructure_and_components'] %}
             <li>{{item['name']}}</li>
             {% endfor %}
           </td>

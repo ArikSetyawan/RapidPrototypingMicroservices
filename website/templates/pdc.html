@@ -135,7 +135,7 @@ Coded by www.creative-tim.com
           <div class="col-md-12">
             <div class="card ">
               <div class="card-body ">
-                <h2>Platform Design Canvas</h2> <a href="#" class="btn btn-primary"><i class="nc-icon nc-cloud-download-93"></i></a>
+                <h2>Platform Design Canvas</h2> <a href="/pdc/print" class="btn btn-primary"><i class="nc-icon nc-cloud-download-93"></i></a>
                 <a href="#" class="btn btn-success btn-round" data-toggle="modal" data-target="#pdcmodal">Add Item</a>
               </div>
             </div>
@@ -148,7 +148,7 @@ Coded by www.creative-tim.com
                 <h4>Platform Owners</h4>
                 <ul>
                   {% for item in pdc['platform_owners'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -160,7 +160,7 @@ Coded by www.creative-tim.com
                 <h4>Platform Stakeholders</h4>
                 <ul>
                   {% for item in pdc['platform_stakeholders'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -172,7 +172,7 @@ Coded by www.creative-tim.com
                 <h4>Peers</h4>
                 <ul>
                   {% for item in pdc['peers'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -184,7 +184,7 @@ Coded by www.creative-tim.com
                 <h4>Partners</h4>
                 <ul>
                   {% for item in pdc['partners'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -196,7 +196,7 @@ Coded by www.creative-tim.com
                 <h4>Transactions</h4>
                 <ul>
                   {% for item in pdc['transactions'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -208,7 +208,7 @@ Coded by www.creative-tim.com
                 <h4>Channel and Contexts</h4>
                 <ul>
                   {% for item in pdc['channel_and_contexts'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -220,7 +220,7 @@ Coded by www.creative-tim.com
                 <h4>Services</h4>
                 <ul>
                   {% for item in pdc['services'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -232,7 +232,7 @@ Coded by www.creative-tim.com
                 <h4>Value Propositions</h4>
                 <ul>
                   {% for item in pdc['value_propositions'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -244,7 +244,7 @@ Coded by www.creative-tim.com
                 <h4>Infrastructure and Components</h4>
                 <ul>
                   {% for item in pdc['infrastructure_and_components'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#pdcmodaledit{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/pdc/delete/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -280,7 +280,7 @@ Coded by www.creative-tim.com
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add new item in BMC</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add new item in PDC</h5>
         </div>
         <form action="/pdc/add_item" method="POST">
           <div class="modal-body">
@@ -301,6 +301,204 @@ Coded by www.creative-tim.com
       </div>
     </div>
   </div>
+
+  {% for item in pdc['platform_owners'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in pdc['platform_stakeholders'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in pdc['peers'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in pdc['partners'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in pdc['transactions'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in pdc['channel_and_contexts'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in pdc['services'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in pdc['value_propositions'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for item in pdc['infrastructure_and_components'] %}
+  <div class="modal fade" id="pdcmodaledit{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit PDC Item</h5>
+        </div>
+        <form action="/pdc/edit/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Name</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 
 
 

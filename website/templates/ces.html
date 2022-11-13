@@ -135,7 +135,7 @@ Coded by www.creative-tim.com
           <div class="col-md-12">
             <div class="card ">
               <div class="card-body ">
-                <h2>Cause, Effect Solution</h2> <a href="#" class="btn btn-primary"><i class="nc-icon nc-cloud-download-93"></i></a>
+                <h2>Cause, Effect Solution</h2> <a href="/ces/print" class="btn btn-primary"><i class="nc-icon nc-cloud-download-93"></i></a>
                 <a href="#" class="btn btn-success btn-round" data-toggle="modal" data-target="#causemodal">Create Cause</a> <a href="#" class="btn btn-success btn-round" data-toggle="modal" data-target="#effectmodal">Create Effect</a> <a href="#" class="btn btn-success btn-round" data-toggle="modal" data-target="#solutionmodal">Create Solution</a>
               </div>
             </div>
@@ -148,7 +148,7 @@ Coded by www.creative-tim.com
                 <h2>Cause</h2>
                 <ul>
                   {% for item in ces['causes'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}}<a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editcausemodal{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/ces/delete_cause/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -160,7 +160,7 @@ Coded by www.creative-tim.com
                 <h2>Effect</h2>
                 <ul>
                   {% for item in ces['effects'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editeffectmodal{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/ces/delete_effect/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -172,7 +172,7 @@ Coded by www.creative-tim.com
                 <h2>Solution</h2>
                 <ul>
                   {% for item in ces['solutions'] %}
-                  <li>{{item['name']}}</li>
+                  <li>{{item['name']}} <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editsolutionmodal{{item['id']}}"><i class="nc-icon nc-ruler-pencil"></i></a> <a href="/ces/delete_solution/{{item['id']}}" class="btn btn-danger btn-sm"><i class="nc-icon nc-simple-remove"></i></a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -253,34 +253,107 @@ Coded by www.creative-tim.com
   </div>
   {% endif %}
 
-    <!-- Modal solution -->
-    {% if ces['effects']|length != 0 %}
-    <div class="modal fade" id="solutionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create Effect</h5>
-          </div>
-          <form action="/ces/create_solution" method="POST">
-            <div class="modal-body">
-              <label>Cause</label>
-              <select name="effect" class="form-control">
-                {% for item in ces['effects'] %}
-                <option value="{{item['id']}}">{{item['name']}}</option>
-                {% endfor %}
-              </select>
-              <label>Solution</label>
-              <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button class="btn btn-primary">Save changes</button>
-            </div>
-          </form>
+  <!-- Modal solution -->
+  {% if ces['effects']|length != 0 %}
+  <div class="modal fade" id="solutionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Solution</h5>
         </div>
+        <form action="/ces/create_solution" method="POST">
+          <div class="modal-body">
+            <label>Effect</label>
+            <select name="effect" class="form-control">
+              {% for item in ces['effects'] %}
+              <option value="{{item['id']}}">{{item['name']}}</option>
+              {% endfor %}
+            </select>
+            <label>Solution</label>
+            <input type="text" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
-    {% endif %}
+  </div>
+  {% endif %}
+
+
+  <!-- Edit Cause Modal -->
+  {% for item in ces['causes'] %}
+  <div class="modal fade" id="editcausemodal{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Cause</h5>
+        </div>
+        <form action="/ces/edit_cause/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Cause</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+
+
+  <!-- Edit Effect Modal -->
+  {% for item in ces['effects'] %}
+  <div class="modal fade" id="editeffectmodal{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Effect</h5>
+        </div>
+        <form action="/ces/edit_effect/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Cause</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+
+  <!-- Edit Solution Modal -->
+  {% for item in ces['solutions'] %}
+  <div class="modal fade" id="editsolutionmodal{{item['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Solution</h5>
+        </div>
+        <form action="/ces/edit_solution/{{item['id']}}" method="POST">
+          <div class="modal-body">
+            <label>Cause</label>
+            <input type="text" value="{{item['name']}}" class="form-control" name="name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 
   <!--   Core JS Files   -->
   <script src="static/js/core/jquery.min.js"></script>
